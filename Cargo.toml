@@ -1,0 +1,8 @@
+[package]
+
+name = "kdeconnect-send"
+version = "0.0.1"
+authors = ["Hoàng Đức Hiếu <hdhoang@zahe.me>"]
+
+[dependencies.dbus-rs]
+git = "https://github.com/diwic/dbus-rs"

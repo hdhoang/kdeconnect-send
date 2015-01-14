@@ -1,0 +1,12 @@
+[root]
+name = "kdeconnect-send"
+version = "0.0.1"
+dependencies = [
+ "dbus-rs 0.0.2 (git+https://github.com/diwic/dbus-rs)",
+]
+
+[[package]]
+name = "dbus-rs"
+version = "0.0.2"
+source = "git+https://github.com/diwic/dbus-rs#a38af7521e9c5c6576b9b8c95e85238795178c41"
+
