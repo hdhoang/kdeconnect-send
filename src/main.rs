@@ -9,7 +9,7 @@ static PATH: &'static str = "/modules/kdeconnect";
 fn get_ids(c: &Connection) -> Result<Vec<String>, &'static str> {
     let mut m = Message::new_method_call(DEST
                                          , PATH
-                                         , (DEST.to_string() + ".daemon").as_slice()
+                                         , [DEST, "daemon"].connect(".").as_slice()
                                          , "devices").unwrap();
     m.append_items(&[MessageItem::Bool(true)]); // onlyReachable
     m = c.send_with_reply_and_block(m, 1000).unwrap();
@@ -26,8 +26,8 @@ fn get_ids(c: &Connection) -> Result<Vec<String>, &'static str> {
 
 fn share_url(c: &Connection, id: &String, url: &String) {
     let mut m = Message::new_method_call(DEST
-                                         , (PATH.to_string() + "/devices/" + id.as_slice() + "/share").as_slice()
-                                         , (DEST.to_string() + ".device.share").as_slice()
+                                         , [PATH, "devices", id.as_slice(), "share"].connect("/").as_slice()
+                                         , [DEST, "device.share"].connect(".").as_slice()
                                          , "shareUrl").unwrap();
     m.append_items(&[MessageItem::Str(url.clone())]);
     c.send_with_reply_and_block(m, 1000).unwrap();
