@@ -11,7 +11,7 @@ fn get_ids(c: &Connection) -> Result<Vec<String>, &'static str> {
                                          , PATH
                                          , (DEST.to_string() + ".daemon").as_slice()
                                          , "devices").unwrap();
-    m.append_items(&[MessageItem::Bool(true)]);
+    m.append_items(&[MessageItem::Bool(true)]); // onlyReachable
     m = c.send_with_reply_and_block(m, 1000).unwrap();
     let items = m.get_items();
     match items[0] {
