@@ -16,8 +16,8 @@ fn get_ids(c: &Connection) -> Result<Vec<String>, &'static str> {
     let items = m.get_items();
     match items[0] {
         MessageItem::Array(_, 0) => Err("No reachable devices"),
-        MessageItem::Array(ref a, _) => Ok(a.clone().into_iter().map(|e| match e {
-            MessageItem::Str(s) => s,
+        MessageItem::Array(ref a, _) => Ok(a.iter().map(|&ref e| match *e {
+            MessageItem::Str(ref s) => s.clone(),
             _ => unreachable!(),
         }).collect()),
         _ => unreachable!(),
