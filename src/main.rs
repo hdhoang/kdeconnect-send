@@ -40,10 +40,13 @@ fn main() {
     }
 
     let ref c = Connection::get_private(BusType::Session).unwrap();
-    let ids = get_ids(c).unwrap();
-    for url in urls.iter() {
-        for id in ids.iter() {
-            share_url(c, id, url);
-        }
+    match get_ids(c) {
+        Err(e) => return println!("{}", e),
+        Ok(ids) =>
+            for url in urls.iter() {
+                for id in (*ids).iter() {
+                    share_url(c, id, url);
+                }
+            }
     }
 }
