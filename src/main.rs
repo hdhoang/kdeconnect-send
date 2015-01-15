@@ -35,6 +35,9 @@ fn share_url(c: &Connection, id: &String, url: &String) {
 
 fn main() {
     let urls = &args()[1..];
+    if urls.is_empty() {
+        return println!("Usage: {} url [url ...]", &args()[0])
+    }
 
     let ref c = Connection::get_private(BusType::Session).unwrap();
     let ids = get_ids(c).unwrap();
