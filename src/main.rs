@@ -13,8 +13,7 @@ fn get_ids(c: &Connection) -> Result<Vec<String>, &'static str> {
                                          , "devices").unwrap();
     m.append_items(&[MessageItem::Bool(true)]); // onlyReachable
     m = c.send_with_reply_and_block(m, 1000).unwrap();
-    let items = m.get_items();
-    match items[0] {
+    match m.get_items()[0] {
         MessageItem::Array(_, 0) => Err("No reachable devices."),
         MessageItem::Array(ref a, _) => Ok(a.iter().map(|&ref e| match *e {
             MessageItem::Str(ref s) => s.clone(),
