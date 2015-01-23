@@ -1,6 +1,6 @@
 extern crate "dbus-rs" as dbus;
 
-use std::os::args;
+use std::os::{args, set_exit_status};
 use dbus::{Connection, BusType, Message, MessageItem};
 
 static DEST: &'static str = "org.kde.kdeconnect";
@@ -35,6 +35,7 @@ fn share_url(c: &Connection, id: &String, url: &String) {
 fn main() {
     let urls = &args()[1..];
     if urls.is_empty() {
+        set_exit_status(1);
         return println!("Usage: {} url [url ...]", &args()[0])
     }
 
