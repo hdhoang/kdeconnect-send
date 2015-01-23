@@ -3,8 +3,8 @@ extern crate "dbus-rs" as dbus;
 use std::os::{args, set_exit_status};
 use dbus::{Connection, BusType, Message, MessageItem};
 
-static DEST: &'static str = "org.kde.kdeconnect";
-static PATH: &'static str = "/modules/kdeconnect";
+const DEST: &'static str = "org.kde.kdeconnect";
+const PATH: &'static str = "/modules/kdeconnect";
 
 fn get_ids(c: &Connection) -> Result<Vec<String>, &'static str> {
     let mut m = Message::new_method_call(DEST
