@@ -44,9 +44,9 @@ fn main() {
     let ref c = Connection::get_private(BusType::Session).unwrap();
     match get_ids(c) {
         Err(e) => return println!("{}", e),
-        Ok(ids) =>
-            for url in urls.iter() {
-                for id in (*ids).iter() {
+        Ok(ref ids) =>
+            for ref url in urls {
+                for ref id in ids {
                     share_url(c, id, url);
                 }
             }
