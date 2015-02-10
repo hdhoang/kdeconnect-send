@@ -8,5 +8,5 @@ dependencies = [
 [[package]]
 name = "dbus-rs"
 version = "0.0.3"
-source = "git+https://github.com/diwic/dbus-rs#c5b7ef7f2cc9a3e94e8e40002015792c6ef5ecd4"
+source = "git+https://github.com/diwic/dbus-rs#e1222411486503ad31fd45627808f106510e71ea"
 

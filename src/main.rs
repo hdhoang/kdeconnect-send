@@ -1,6 +1,7 @@
+#![feature(core,env,os)]
 extern crate "dbus-rs" as dbus;
 
-use std::os::{args, set_exit_status};
+use std::env::{args, set_exit_status};
 use dbus::{Connection, BusType, Message, MessageItem};
 
 const DEST: &'static str = "org.kde.kdeconnect";
@@ -33,10 +34,11 @@ fn share_url(c: &Connection, id: &String, url: &String) {
 }
 
 fn main() {
-    let urls = &args()[1..];
+    let args: Vec<_> = args().map(|oss| oss.into_string().unwrap()).collect();
+    let urls = &args[1..];
     if urls.is_empty() {
         set_exit_status(1);
-        return println!("Usage: {} url [url ...]", &args()[0])
+        return println!("Usage: {} url [url ...]", &args[0])
     }
 
     let ref c = Connection::get_private(BusType::Session).unwrap();
